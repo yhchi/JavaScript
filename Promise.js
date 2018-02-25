@@ -56,27 +56,36 @@ class Promise {
 
         let promise = new Promise(function(resolve, reject) {
             _fn1 = function(x) {
-                let result = fn1(x);
-                if (result instanceof Promise) {
-                    result.then(function(x) {
-                        resolve(x);
-                    }, function(x) {
-                        reject(x);
-                    });
-                } else {
-                    resolve(result);
+                try {
+                    let result = fn1(x);
+                    if (result instanceof Promise) {
+                        result.then(function(x) {
+                            resolve(x);
+                        }, function(x) {
+                            reject(x);
+                        });
+                    } else {
+                        resolve(result);
+                    }
+                } catch(e) {
+                    reject(e);
                 }
+                
             };
             _fn2 = function(x) {
-                let result = fn2(x);
-                if (result instanceof Promise) {
-                    result.then(function(x) {
-                        resolve(x);
-                    }, function(x) {
-                        reject(x);
-                    });
-                } else {
-                    resolve(result);
+                try {
+                    let result = fn2(x);
+                    if (result instanceof Promise) {
+                        result.then(function(x) {
+                            resolve(x);
+                        }, function(x) {
+                            reject(x);
+                        });
+                    } else {
+                        resolve(result);
+                    }
+                } catch(e) {
+                    reject(e);
                 }
             }
         });
